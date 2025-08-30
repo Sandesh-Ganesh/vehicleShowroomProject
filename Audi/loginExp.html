@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Signup</title>
+    <link href="https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: url('./Images/car2.jpg') no-repeat center center fixed; /* Replace with your image URL */
+            background-size: cover;
+            color: white;
+            /* font-family: 'Helvetica Neue', sans-serif; */
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            background-color: #dae5ef;
+            font-family: Porsche Next, Arial Narrow, Arial, Heiti SC, SimHei, sans-serif;
+            min-width:400px;
+            max-width:1200px;
+        }
+        .container {
+            max-width: 400px;
+            padding: 30px;
+            background-color: rgba(34, 34, 34, 0.9); /* Slightly more opaque background */
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
+            transition: transform 0.2s;
+            min-width: 420px;
+            max-width: 420px;
+        }
+        .container:hover {
+            transform: scale(1.02);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 700;
+            min-width: 360px;
+            max-width: 420px;
+        }
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+            min-width: 360px;
+            max-width: 420px;
+        }
+        input {
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 6px;
+            padding: 12px;
+            background-color: #333;
+            color: white;
+            transition: border-color 0.3s;
+            width: 100%;
+            min-width: 360px;
+            max-width: 420px;
+        }
+        input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        button {
+            border-radius: 8px;
+            background-color: #007bff;
+            color: white;
+            padding: 12px;
+            border: none;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.2s;
+            width: 100%;
+            min-width: 360px;
+            max-width: 420px;
+        }
+        button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        .error {
+            color: #ff4d4d;
+            font-size: 0.9em;
+            margin-top: 5px;
+            min-width: 360px;
+            max-width: 420px;
+        }
+        .toggle-link {
+            text-align: center;
+            color: #007bff;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+        .requirements {
+            display: none;
+            font-size: 0.9em;
+            margin-top: 5px;
+            color: #ddd;
+            min-width: 360px;
+            max-width: 420px;
+        }
+        @media ( prefers-reduced-motion : reduce ){
+            *{
+                animation:none !important;
+                transition:none !important;
+                
+            }
+            .container{
+                transition: none;
+            }
+            button{
+                transition: none; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="container" role="main">
+        <div class="form-container signin-container" aria-labelledby="signin-heading">
+            <h2 id="signin-heading" tabindex="1">Sign In</h2>
+            <form id="signin-form" onsubmit="return validateSignIn()">
+                <label for="login-username" >Username/Email</label>
+                <input type="text" id="login-username" placeholder="Username or Email" tabindex="2" required>
+                <div class="error" id="login-username-error" role="alert"></div>
+
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" placeholder="Password" tabindex="3" required>
+                <div class="error" id="login-password-error" role="alert"></div>
+
+                <button type="submit" tabindex="4">Sign In</button>
+                <div class="toggle-link" tabindex="5" onclick="toggleForm()">Don't Have an Account? Sign Up</div>
+            </form>
+        </div>
+
+        <div class="form-container signup-container" style="display: none;" aria-labelledby="signup-heading">
+            <h2 id="signup-heading" tabindex="1" >Sign Up</h2>
+            <form id="signup-form" method="post" onsubmit="return validateSignUp()">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Username" tabindex="2" required>
+                <div class="error" id="username-error" role="alert"></div>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Email" tabindex="3" required>
+                <div class="error" id="email-error" role="alert"></div>
+
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Password" tabindex="4" required onfocus="showRequirements()" onblur="hideRequirements()">
+                <div class="requirements" id="password-requirements"></div>
+                <div class="error" id="password-error" role="alert"></div>
+
+                <label for="cpassword">Confirm Password</label>
+                <input type="password" id="cpassword" placeholder="Confirm Password" tabindex="5" required oninput="validateConfirmPassword(this)">
+                <div class="error" id="cpassword-error" role="alert"></div>
+
+                <button type="submit" tabindex="6" >Sign Up</button>
+                <div class="toggle-link" onclick="toggleForm()" tabindex="7">Already Have an Account? Sign In</div>
+            </form>
+        </div>
+    </main>
+
+
+
+    <script>
+        document.getElementById('username').addEventListener('input',validateUsername);
+        document.getElementById('email').addEventListener('input',validateEmail);
+        document.getElementById('password').addEventListener('input',validatePassword);
+        document.getElementById('cpassword').addEventListener('input',validateConfirmPassword);
+
+        function validateUsername(){
+            const username = document.getElementById('username').value;
+            if (username.length>1 && username.length < 3) {
+                document.getElementById('username-error').textContent = 'Username must be at least 3 characters long.';
+                return false;
+            }
+            if(username==''){
+                document.getElementById('username-error').textContent = 'Username is required';
+                return false;
+            }
+            document.getElementById('username-error').textContent = '';
+            
+            return true;
+
+        }
+        function validateEmail(){
+            const email = document.getElementById('email').value;
+            const emailPattern = /^(\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*)$/;
+            if (!emailPattern.test(email)) {
+                document.getElementById('email-error').textContent = 'Please enter a valid email address.';
+                return false;
+            }
+            if(username==''){
+                document.getElementById('email-error').textContent = 'Email is required';
+                return false;
+            }
+            document.getElementById('email-error').textContent = '';
+            return true;
+
+        }
+        function validatePassword(){
+            const password = document.getElementById('password').value;
+
+            let passwordPattern= /^((?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*-+]).{8,})$/;
+            // console.log(email);
+            if(password==""){
+                document.getElementById('password-error').textContent = 'Password is required.';
+                return false;
+            }
+            if(!passwordPattern.test(password)){
+                document.getElementById('password-error').textContent = 'Password must be at least 8 characters long and a contain a Capital, Small,Special Character  ';
+                return false;  
+        }
+        document.getElementById('password-error').textContent = '';
+        return true;
+}   
+
+
+        const USERS_KEY = 'users';
+        let users = JSON.parse(localStorage.getItem(USERS_KEY)) || [];
+
+        function validateSignIn() {
+            const username = document.getElementById('login-username').value;
+            const password = document.getElementById('login-password').value;
+            let valid = true;
+
+            document.getElementById('login-username-error').textContent = '';
+            document.getElementById('login-password-error').textContent = '';
+
+            const user = users.find(user => 
+                (user.username === username || user.email === username) && user.password === encrypt(password)
+            );
+
+            if (!user) {
+                document.getElementById('login-username-error').textContent = 'Invalid username or password.';
+                valid = false;
+            }
+
+            if (valid) {
+                
+                sessionStorage.setItem('loggedInUser', JSON.stringify({ username: user.username, email: user.email }));
+                // window.location.href = "./index.html";
+                var b=document.getElementById("login-username").value;
+                url='./index.html?name='+encodeURIComponent(b);
+                window.location.href=url;
+                document.getElementById('login-username').value='';
+                document.getElementById('login-password').value='';
+            }
+
+            return false;
+        }
+
+        function validateSignUp() {
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('cpassword').value;
+            let valid = true;
+
+            document.getElementById('username-error').textContent = '';
+            document.getElementById('email-error').textContent = '';
+            document.getElementById('password-error').textContent = '';
+            document.getElementById('cpassword-error').textContent = '';
+
+            if (users.some(user => user.username === username)) {
+                document.getElementById('username-error').textContent = 'Username already exists. Try a different one.';
+                valid = false;
+            }
+            if (users.some(user => user.email === email)) {
+                document.getElementById('email-error').textContent = 'Email already exists. Try a different one.';
+                valid = false;
+            }
+
+            valid=validateUsername();
+            valid=validateEmail();
+            valid=validatePassword();
+            
+            
+
+            if (password !== confirmPassword) {
+                document.getElementById('cpassword-error').textContent = 'Passwords do not match.';
+                valid = false;
+            }
+            else{
+                document.getElementById('cpassword-error').textContent = '';
+                valid = true;
+            }
+            if (valid) {
+                users.push({ username, email, password: encrypt(password) });
+                localStorage.setItem(USERS_KEY, JSON.stringify(users));
+                alert("Signed up successfully!");
+                document.getElementById('username').value='';
+                document.getElementById('email').value='';
+                document.getElementById('password').value='';
+                document.getElementById('cpassword').value='';
+            }
+
+            return false; 
+        }
+
+        function validateConfirmPassword(input) {
+            const password = document.getElementById('password').value;
+            const errorElement = document.getElementById('cpassword-error');
+            if (input.value !== password) {
+                errorElement.textContent = 'Passwords do not match.';
+            } else {
+                errorElement.textContent = '';
+            }
+        }
+
+        function showRequirements() {
+            document.getElementById('password-requirements').style.display = 'block';
+        }
+
+        function hideRequirements() {
+            document.getElementById('password-requirements').style.display = 'none';
+        }
+
+        function encrypt(text) {
+            // Simple "encryption" for demonstration. Use a proper library for production.
+            return btoa(text); // Base64 encoding
+        }
+
+        function toggleForm() {
+            const signInContainer = document.querySelector('.signin-container');
+            const signUpContainer = document.querySelector('.signup-container');
+            signInContainer.style.display = (signInContainer.style.display === 'none') ? 'block' : 'none';
+            signUpContainer.style.display = (signUpContainer.style.display === 'none') ? 'block' : 'none';
+        }
+    </script>
+</body>
+</html>

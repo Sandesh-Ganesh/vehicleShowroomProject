@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <link rel="icon" type="image/svg" href="./images/titleIcon.png">
+    <title>Audi | Configurator</title>
+    <style>
+        body {
+            font-family: Porsche Next, Arial Narrow, Arial, Heiti SC, SimHei, sans-serif;
+            /* background-color: #eaeaea; */
+            background-color: #dae5ef;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Prevent horizontal overflow */
+        }
+        header {
+            background-color: #222; /* Darker gray */
+            color: #fff;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-container {
+        margin: 1%;
+        display: flex;
+        flex-wrap: inherit;
+        justify-content: space-between;
+        width: 95%;
+        }
+        .navbar-brand {
+        font-size: 24px;
+        font-weight: bold;
+        margin-left: 10px;
+        }
+
+        .navbar-dark .navbar-toggler-icon {
+        background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"%3E%3Cpath stroke="rgba%280, 0, 0, 0.5%29" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E');
+        }
+        main {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            padding: 20px;
+            align-items: center;
+            justify-content: flex-start;
+            margin-top: 4%;
+        }
+        .main-container {
+            display: flex;
+            width: 100%;
+            height: calc(100vh - 40px);
+            margin: 20px 0;
+            border-radius: 10px;
+            overflow: hidden;
+            /* gap: 20px; */
+        }
+        .image-container {
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            position: relative;
+        }
+        .car-image {
+            width: 100%;
+            height: 60%;
+            object-fit: cover;      
+            border-radius: 10px 10px 10px 10px;
+            box-shadow: 3px 2px 6px grey;
+            margin-bottom:5px;
+             /*border: 3px solid #000; Black border */
+        }
+        .image-options {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            width: 100%; /* Increased width */
+            height: 43%;
+            padding: 10px;
+            overflow-x: auto; /* Allow horizontal scrolling */
+            background-color: #7d8c99; /* White background */
+            border-radius: 10px 10px 10px 10px; /* Rounded corners */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .color-option {
+            width: 100px; /* Width of color option */
+            height: 100px;
+            cursor: pointer;
+            margin: 5px 10px;
+            transition: transform 0.3s;
+            background-size: cover;
+            background-position: center;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            flex-shrink: 0; /* Prevent shrinking */
+        }
+        .color-option.selected {
+            border-color: #007acc; 
+        }
+        .color-option:hover {
+            transform: scale(1.1);
+            border-color: #007acc; /* Change border color on hover */
+        }
+        .options {
+            width: 40%; /* Adjusted width */
+            height: 100%;
+            padding: 20px;
+            background: #fff; /* White */
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            overflow-x: none;
+            overflow-y: auto; /* Allow vertical scrolling */
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background-color: #7d8c99;
+        }
+        
+        .option-group {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .toggle-button {
+            background: #333; /* Dark gray */
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            font-size: 14px; /* Reduced size */
+            padding: 5px 10px; /* Adjusted padding */
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            margin-left: 5px;
+            height: 30px; /* Height of the button */
+        }
+        .toggle-button:hover {
+            background-color: #555; /* Slightly lighter gray on hover */
+        }
+        .btn {
+            background-color: #222; /* Darker gray */
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #444; /* Darker gray on hover */
+        }
+        .option-wrapper {
+            display: flex; /* Show by default */
+            flex-wrap: wrap; /* Allow wrapping */
+            gap: 10px;
+            overflow-x: auto; /* Allow horizontal scrolling */
+            width: 100%;
+            margin:9%;
+        }
+        .preview {
+            margin-top: 20px;
+            padding: 10px;
+            background: #e9e9e9; /* Light gray for preview */
+            border-radius: 5px;
+            width: 100%;
+        }
+        .footer-section {
+            background-color: #000;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 14px;
+        }
+        .options::-webkit-scrollbar, .image-options::-webkit-scrollbar, .option-group::-webkit-scrollbar{
+        display: none;
+        }
+        /* .options{
+            overflow-x: hidden;
+        } */
+        .image-option{
+            width:250px;
+        }
+
+        /* Media Queries for Responsive Design */
+        @media (max-width: 600px) { /* Small devices */
+            .main-container {
+                flex-direction: column;
+                height: auto;
+            }
+            .image-container {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            .car-image {
+                height: 40vh; /* Adjust height for mobile */
+            }
+            .options {
+                width: 100%;
+                margin-top: -10px;
+                height: auto;
+            }
+            .car-image{
+                object-fit: contain;
+                width:90%;
+            }
+            
+        }
+
+        @media (min-width: 601px) and (max-width: 900px) { /* Medium devices */
+            .main-container {
+                flex-direction: row;
+                height: calc(100vh - 40px);
+            }
+            .image-container {
+                width: 65%;
+            }
+            .car-image{
+                object-fit: contain;
+            }
+            .options {
+                width: 50%;
+            }
+            
+        }
+        @media (min-width:700px) and (max-width:900px){
+            .color-option{
+                width:90px;
+                height: 90px;
+            }
+        }
+
+        @media (min-width: 901px) { /* Large devices */
+            .main-container {
+                flex-direction: row;
+                height: calc(100vh - 40px);
+            }
+            .image-container {
+                width: 70%;
+            }
+            .options {
+                width: 30%;
+            }
+        }
+        @media (min-width: 901px) and (max-width:1400px) { /* Large devices */
+            .car-image{
+                object-fit: contain;
+            }
+            .image-option{
+                width:250px;
+            }
+            
+        }
+        @media (min-width: 1400px){ /* Large devices */
+            .car-image{
+                object-fit: contain;
+            }
+            .image-option{
+                width:250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header data-bs-theme="dark">
+        <!-- <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">Carousel</a>
+              <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarCollapse"
+                aria-controls="navbarCollapse"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                  </li>
+                </ul>
+                <form class="d-flex" role="search">
+                  <input
+                    class="form-control me-2"
+                    type="search"
+                    placeholder="Search"
+                    aria-label="Search"
+                  />
+                  <button class="btn btn-outline-success" type="submit">
+                    Search
+                  </button>
+                </form>
+              </div>
+            </div>
+          </nav> -->
+        <!-- Navigation Bar -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <div class="nav-container">
+              <img src="./images/titleIcon.png" width="80px" height="50px">
+              <a class="navbar-brand" href="./index.html">Audi R8</a>
+              <!-- Hamburger Menu Button -->
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <!-- Collapsible Menu -->
+              <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                  <li class="nav-item">
+                    <a class="nav-link" href="./index.html">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" accesskey="c" title="alt+c" href="./contactInfo.html">Contact Us</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" accesskey="a" title="alt+a" href="./about_us.html">About</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" accesskey="x" title="alt+x" href="./addNav.html">Configure</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" accesskey="d" title="alt+d" href="./homepage.html#btn360">3D Model</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+      </header>
+    
+    <main>
+        <div class="main-container">
+            <div class="image-container">
+                <img src="" alt="">
+                <img src="./Images/FloretSilverMetalic/img_1.jpg" alt="Car" class="car-image"> 
+                <div class="image-options"></div>
+            </div>
+
+            <div class="options">
+                <div class="option-group" id="color-options">
+                    <div style="display: flex; justify-content: flex-end;  width:100%">
+                        <h2 style="width:70%">Exterior Colors</h2>
+                        <button style="width:30%;background-color: #7d8c99;
+                        color: black;
+                        font-size: 20px;
+                        font-weight: bolder" class="toggle-button" onclick="toggleVisibility('color-options')">-</button>
+                    </div>
+                    <p id="selected-color"></p>
+                    <div class="option-wrapper"></div>
+                </div>
+                <div class="option-group" id="tyre-options">
+                    
+                    <div style="display: flex; justify-content: flex-end; width:100%">
+                        <h2 style="width:70%">Wheels</h2>
+                    <button  style="width:30%;background-color: #7d8c99;
+                    color: black;
+                    font-size: 20px;
+                    font-weight: bolder" class="toggle-button" onclick="toggleVisibility('tyre-options')">-</button>
+                </div>
+                    <p id="selected-wheel"></p>
+
+                    <div class="option-wrapper"></div>
+                </div>
+                <button class="btn" id="reset">Reset</button>
+                <button class="btn" id="submit">Submit Configuration</button>
+                <!-- <div class="preview" id="preview"></div> -->
+            </div>
+        </div>
+    </main>
+    <footer class="footer-section">
+        <p>&copy; 2024 Audi AG. All rights reserved. | Experience the Thrill of the Audi R8</p>
+    </footer>
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const imageOptionsDiv = document.querySelector('.image-options');
+            const colorOptionsDiv = document.getElementById('color-options').querySelector('.option-wrapper');
+            const tyreOptionsDiv = document.getElementById('tyre-options').querySelector('.option-wrapper');
+            const resetButton = document.getElementById('reset');
+            const submitButton = document.getElementById('submit');
+            const carImage = document.querySelector('.car-image');
+            const previewDiv = document.getElementById('preview');
+
+            const carImages = {
+                'Ascari Blue Metallic': [
+                    './Images/AscariBlueMetallic/img_0.jpeg',
+                    './Images/AscariBlueMetallic/img_1.jpg',
+                    './Images/AscariBlueMetallic/img_2.jpg',
+                    './Images/AscariBlueMetallic/img_3.jpg',
+                    './Images/AscariBlueMetallic/img_4.jpg',
+                    './Images/AscariBlueMetallic/img_5.jpg',
+                    './Images/AscariBlueMetallic/img_6.jpg',
+                ],
+                'Floret Silver Metallic': [
+                    './Images/FloretSilverMetalic/img_0.jpg',
+                    './Images/FloretSilverMetalic/img_1.jpg',
+                    './Images/FloretSilverMetalic/img_2.jpg',
+                    './Images/FloretSilverMetalic/img_3.jpg',
+                    './Images/FloretSilverMetalic/img_4.jpg',
+                    './Images/FloretSilverMetalic/img_5.jpg',
+                    './Images/FloretSilverMetalic/img_6.jpg',
+                ],
+                'Kemora Gray Metallic': [
+                    './Images/KemoraGrayMetalic/img_0.jpg',
+                    './Images/KemoraGrayMetalic/img_2.jpg',
+                    './Images/KemoraGrayMetalic/img_3.jpg',
+                    './Images/KemoraGrayMetalic/img_4.jpg',
+                    './Images/KemoraGrayMetalic/img_5.jpg',
+                    './Images/KemoraGrayMetalic/img_1.jpg',
+                    './Images/KemoraGrayMetalic/img_6.jpg',
+                ],
+                'Myth Black Metallic': [
+                    './Images/MythBlackMetalic/img_0.jpg',
+                    './Images/MythBlackMetalic/img_1.jpg',
+                    './Images/MythBlackMetalic/img_2.jpg',
+                    './Images/MythBlackMetalic/img_3.jpg',
+                    './Images/MythBlackMetalic/img_4.jpg',
+                    './Images/MythBlackMetalic/img_5.jpg',
+                    './Images/MythBlackMetalic/img_6.jpg',
+                ],
+                'Suzuka Gray Metallic': [
+                './images/suzukaGrayMetalic/img_0.jpg',
+                './images/suzukaGrayMetalic/img_1.jpg',
+                './images/suzukaGrayMetalic/img_2.jpg',
+                './images/suzukaGrayMetalic/img_3.jpg',
+                './images/suzukaGrayMetalic/img_4.jpg',
+                './images/suzukaGrayMetalic/img_5.jpg',
+                './images/suzukaGrayMetalic/img_6.jpg'
+            ]
+            };
+
+            const tyreImages = {
+                '19" Wheels, 5-double-spoke style, Matte Titanium Gray': {
+                    optionImg: './Images/Tyres/tyre1/img_0.jpg',
+                    carImg: './Images/Tyres/tyre1/img_1.jpg'
+                },
+                '20" Wheels, 5-double-spoke style, Glossy Black': {
+                    optionImg: './Images/Tyres/tyre2/img_0.jpg',
+                    carImg: './Images/Tyres/tyre2/img_1.jpg'
+                },
+                '18" Wheels, 10-spoke style, Silver': {
+                    optionImg: './Images/Tyres/tyre3/img_0.jpg',
+                    carImg: './Images/Tyres/tyre3/img_1.jpg'
+                }
+            };
+
+            
+            Object.keys(carImages).forEach((color, index) => {
+                const colorDiv = document.createElement('div');
+                colorDiv.className = 'color-option';
+                colorDiv.style.backgroundImage = `url(${carImages[color][0]})`;
+                colorDiv.addEventListener('click', () => {
+                    const images = carImages[color];
+                    carImage.src = images[1]; 
+
+                    document.getElementById('selected-color').innerHTML=color;
+                    imageOptionsDiv.innerHTML = '';
+
+                    
+                    images.forEach((imageSrc, imgIndex) => {
+                        if (imgIndex === 0) return; 
+                        const imgDiv = document.createElement('div');
+                        imgDiv.className = 'color-option';
+                        imgDiv.classList.add('image-option');
+                        imgDiv.style.backgroundImage = `url(${imageSrc})`;
+                        imgDiv.addEventListener('click', () => {
+                            carImage.src = imageSrc; 
+                        });
+                        imageOptionsDiv.appendChild(imgDiv);
+                    });
+
+                    
+                    document.querySelectorAll('.color-option').forEach(div => div.classList.remove('selected'));
+                    colorDiv.classList.add('selected');
+
+                   
+                    //updatePreview();
+                });
+                colorOptionsDiv.appendChild(colorDiv);
+
+                // Select first color by default
+                if (index === 0) {
+                    colorDiv.click(); // Simulate click to select
+                }
+            });
+
+            // Load tire options
+            Object.keys(tyreImages).forEach(tyre => {
+                const tyreDiv = document.createElement('div');
+                tyreDiv.className = 'color-option'; // Changed class for differentiation
+                tyreDiv.style.backgroundImage = `url(${tyreImages[tyre].optionImg})`;
+                tyreDiv.addEventListener('click', () => {
+                    carImage.src = tyreImages[tyre].carImg; // Update car image to the tire option
+
+                    // Mark the selected tire
+                    document.querySelectorAll('.color-option').forEach(div => div.classList.remove('selected'));
+                    document.getElementById('selected-wheel').innerHTML=tyre;
+
+                    tyreDiv.classList.add('selected');
+                    tyreDiv.style.padding='10px';
+
+                    // Update preview
+                    //updatePreview();
+                });
+                tyreOptionsDiv.appendChild(tyreDiv);
+            });
+
+            // Update preview function
+            // function updatePreview() {
+            //     const selectedColor = [...colorOptionsDiv.children].find(child => child.classList.contains('selected'))?.style.backgroundImage || 'None';
+            //     const selectedTyre = [...tyreOptionsDiv.children].find(child => child.classList.contains('selected'))?.style.backgroundImage || 'None';
+            //     previewDiv.innerHTML = `Selected Color: ${selectedColor} <br> Selected Tyre: ${selectedTyre}`;
+            // }
+
+            // Reset button functionality
+            resetButton.addEventListener('click', () => {
+                // carImage.src = './Images/FloretSilverMetalic/img_1.jpg'; // Reset to default car image
+                // imageOptionsDiv.innerHTML = ''; // Clear image options
+                // colorOptionsDiv.innerHTML = ''; // Clear color options
+                // tyreOptionsDiv.innerHTML = ''; // Clear tire options
+                // previewDiv.innerHTML = ''; // Clear preview
+
+
+                const images = carImages['Ascari Blue Metallic'];
+                    carImage.src = images[1]; 
+                    imageOptionsDiv.innerHTML = '';
+
+                images.forEach((imageSrc, imgIndex) => {
+                        if (imgIndex === 0) return; 
+                        const imgDiv = document.createElement('div');
+                        imgDiv.className = 'color-option';
+                        imgDiv.classList.add('image-option');
+                        imgDiv.style.backgroundImage = `url(${imageSrc})`;
+                        imgDiv.addEventListener('click', () => {
+                            carImage.src = imageSrc; 
+                        });
+                        imageOptionsDiv.appendChild(imgDiv);
+                    });
+
+            });
+
+            // Submit button functionality
+            submitButton.addEventListener('click', () => {
+                alert('Configuration submitted!');
+                // Optionally save configuration to local storage
+                const config = {
+                    color: [...colorOptionsDiv.children].find(child => child.classList.contains('selected'))?.style.backgroundImage || 'None',
+                    tyre: [...tyreOptionsDiv.children].find(child => child.classList.contains('selected'))?.style.backgroundImage || 'None'
+                };
+                localStorage.setItem('carConfig', JSON.stringify(config));
+            });
+
+            // Toggle visibility function
+            window.toggleVisibility = function(groupId) {
+                const optionWrapper = document.getElementById(groupId).querySelector('.option-wrapper');
+                optionWrapper.style.display = optionWrapper.style.display === 'none' ? 'flex' : 'none';
+                const toggleButton = document.querySelector(`#${groupId} .toggle-button`);
+                toggleButton.textContent = optionWrapper.style.display === 'flex' ? '-' : '+';
+            };
+        });
+    </script>
+</body>
+</html>

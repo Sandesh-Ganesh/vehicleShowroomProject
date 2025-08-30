@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+
+<head>
+  <script src="../assets/js/color-modes.js"></script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="" />
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors" />
+  <meta name="generator" content="Hugo 0.122.0" />
+  <link rel="icon" type="image/svg" href="./images/titleIcon.png">
+  <title>Audi | Luxury Sports Cars</title>
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/carousel/" />
+  <link rel="stylesheet" href="carousel.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" />
+
+  <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <style>
+    body{
+      background-color: #dae5ef;
+      font-family: Porsche Next, Arial Narrow, Arial, Heiti SC, SimHei, sans-serif;
+    }
+    .header-img {
+      background-image: url("../images/ex1.jpg");
+    }
+
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+    .nav-container {
+      margin: 1%;
+      display: flex;
+      flex-wrap: inherit;
+      justify-content: space-between;
+      width: 95%;
+    }
+    .navbar-brand {
+      font-size: 24px;
+      font-weight: bold;
+      margin-left: 10px;
+    }
+
+    .navbar-dark .navbar-toggler-icon {
+      background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"%3E%3Cpath stroke="rgba%280, 0, 0, 0.5%29" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E');
+    }
+
+    /* Footer Section */
+    .footer-section {
+      background-color: #212529;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+      font-size: 14px;
+      position: absolute;
+      width: 100%;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+    .b-example-divider {
+      width: 100%;
+      height: 3rem;
+      background-color: rgba(0, 0, 0, 0.1);
+      border: solid rgba(0, 0, 0, 0.15);
+      border-width: 1px 0;
+      box-shadow: inset 0 0.5em 1.5em rgba(0, 0, 0, 0.1),
+        inset 0 0.125em 0.5em rgba(0, 0, 0, 0.15);
+    }
+
+    .b-example-vr {
+      flex-shrink: 0;
+      width: 1.5rem;
+      height: 100vh;
+    }
+
+    .bi {
+      vertical-align: -0.125em;
+      fill: currentColor;
+    }
+
+    /* nav
+      {
+        height: 12%;
+      } */
+    .nav-scroller {
+      position: relative;
+      z-index: 2;
+      height: 2.75rem;
+      overflow-y: hidden;
+    }
+
+
+    .nav-scroller .nav {
+      display: flex;
+      flex-wrap: nowrap;
+      padding-bottom: 1rem;
+      margin-top: -1px;
+      overflow-x: auto;
+      text-align: center;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+    }
+    .carousel{
+      margin-top: 3.2%;
+    }
+    .btn-bd-primary {
+      --bd-violet-bg: #712cf9;
+      --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+      --bs-btn-font-weight: 600;
+      --bs-btn-color: var(--bs-white);
+      --bs-btn-bg: var(--bd-violet-bg);
+      --bs-btn-border-color: var(--bd-violet-bg);
+      --bs-btn-hover-color: var(--bs-white);
+      --bs-btn-hover-bg: #6528e0;
+      --bs-btn-hover-border-color: #6528e0;
+      --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+      --bs-btn-active-color: var(--bs-btn-hover-color);
+      --bs-btn-active-bg: #5a23c8;
+      --bs-btn-active-border-color: #5a23c8;
+    }
+
+    .bd-mode-toggle {
+      z-index: 1500;
+    }
+
+    .bd-mode-toggle .dropdown-menu .active .bi {
+      display: block !important;
+    }
+
+    .imgContainer {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .images {
+      position: relative;
+      padding: 0 !important;
+      width: calc(100% / 3);
+      aspect-ratio: 6/4;
+    }
+
+    .highlightBold1 {
+      font-weight: bold;
+      font-size: 32pt;
+      display: flex;
+      justify-content: center;
+      color: white;
+    }
+
+    .highlightBold2 {
+      font-weight: bold;
+      font-size: 32pt;
+      display: flex;
+      justify-content: center;
+      /* color: white; */
+      color: white;
+      /* background-color: #a29d9d73; */
+    }
+
+    .highlightBold3 {
+      font-weight: bold;
+      font-size: 32pt;
+      display: flex;
+      justify-content: center;
+      color: white;
+      margin: auto;
+    }
+
+    .opacity-75 {
+      display: flex;
+      justify-content: center;
+      color: white;
+    }
+
+    .col-md-5 {
+      justify-content: center;
+      display: flex;
+    }
+
+    .container {
+      margin: 2%;
+    }
+
+    .imgContainer {
+      width: 95vw;
+    }
+
+    p {
+      margin: 0% 15px 1rem 15px;
+    }
+
+    .lead {
+      margin-top: revert;
+    }
+
+    .row {
+      margin-left: calc(-.3 * var(--bs-gutter-x));
+      margin-right: 0;
+    }
+
+    .featurette-heading {
+      letter-spacing: -.05rem;
+      margin: 0% 15px 0% 15px;
+    }
+
+    .images>img {
+      position: absolute;
+    }
+
+    .carName {
+      padding: 3%;
+      display: flex;
+      position: absolute;
+      flex-wrap: wrap;
+      width: 100%;
+      height: 100%;
+      z-index: 3;
+      align-content: stretch;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .carName>button {
+      width: 35%;
+      height: 15%;
+      font-size: calc(100%/1.3);
+    }
+
+    .view-btn {
+      background-color: black;
+      color: white;
+      border-radius: 20px;
+      border: black;
+    }
+
+    .view-btn:hover {
+      background-color: white;
+      color: black;
+    }
+
+    .carName>span {
+      color: black;
+      font-weight: bold;
+      font-size: 1.2em;
+      width: fit-content;
+      background-color: #fff;
+      border-radius: 5px;
+      padding: 0 2%;
+    }
+
+    /* li>.dropdown-item{
+        background-color: black !important;
+      } */
+    #bd-theme {
+      background-color: black !important;
+      border-color: black !important;
+    }
+
+
+    @media screen and (max-width:768px) {
+
+      /* .imgContainer {
+          flex-direction: row;
+        } */
+      .images {
+        width: calc(100%/2);
+      }
+
+      .highlightBold1 {
+        font-size: 28pt;
+      }
+
+      .highlightBold2 {
+        font-size: 28pt;
+      }
+
+      .highlightBold3 {
+        font-size: 28pt;
+      }
+    }
+
+    @media screen and (max-width:576px) {
+      .images {
+        width: calc(100%);
+      }
+
+      .highlightBold1 {
+        font-size: 24pt;
+      }
+
+      .highlightBold2 {
+        font-size: 24pt;
+      }
+
+      .highlightBold3 {
+        font-size: 24pt;
+      }
+    }
+
+    /* @media (prefers-color-scheme:light){
+          body{
+            color:black;
+          }
+       } */
+  </style>
+
+  <!-- Custom styles for this template -->
+  <link href="carousel.css" rel="stylesheet" />
+</head>
+
+<body>
+  
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="nav-container">
+        <img src="../images/titleIcon.png" width="80px" height="50px" alt="Audi R8 Logo">
+        <a class="navbar-brand" href="./index.html">Audi R8</a>
+        <!-- Hamburger Menu Button -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon" aria-hidden="true"></span>
+        </button>
+        <!-- Collapsible Menu -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto" role="navigation">
+            <li class="nav-item">
+              <a class="nav-link" href="#header-section" aria-label="Navigate to Home section">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact-section" aria-label="Navigate to Contact Us section">Contact Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#about-section" aria-label="Navigate to About R8 section">About R8</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#footer-section" aria-label="Navigate to Learn More section">Learn More</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main role="main">
+    <div id="myCarousel" class="carousel slide mb-6" aria-label="Audi R8 slideshow">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true"
+          aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active" aria-label="Slide 1">
+          <svg class="bd-placeholder-img" width="100%" height="95%" xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <image href="../images/Carousal1.jpg" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" />
+          </svg>
+          <div class="container">
+            <div class="carousel-caption text-start">
+              <h1 class="highlightBold1">"Unleash the Power"</h1>
+              <p class="opacity-75">
+                The Audi R8
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item" data-bs-interval="5000" data-bs-ride="carousel" aria-label="Slide 2">
+          <svg class="bd-placeholder-img" width="100%" height="95%" xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <image href="../images/carousal7.jpg" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" />
+          </svg>
+          <div class="container">
+            <div class="carousel-caption">
+              <h1 class="highlightBold2">Feel the Adrenaline<br>Unmatched Power</h1>
+              <p class="opacity-75">
+                Experience the thrill of pure adrenaline and unmatched power with every drive.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item" data-bs-interval="5000" data-bs-ride="carousel" aria-label="Slide 3">
+          <svg class="bd-placeholder-img" width="100%" height="95%" xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <image href="../images/Carousal5.jpg" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" />
+          </svg>
+          <div class="container">
+            <div class="carousel-caption text-end">
+              <h1 class="highlightBold3">Engineered in Elegance</h1>
+              <p class="opacity-75">
+                Crafted with precision, designed for elegance.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev"
+        aria-label="Previous slide">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next"
+        aria-label="Next slide">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
+    <div class="container marketing">
+      <!-- Three columns of text below the carousel -->
+      <div class="row imgContainer" aria-label="Audi car models display">
+        <div class="images">
+          <div class="carName">
+            <span>Audi R8</span>
+            <button type="button" class="view-btn" aria-label="View Audi R8">View Car</button>
+          </div>
+          <img class="w-100 h-100" src="../images/car1.jpg" alt="Audi R8 Image" />
+        </div>
+        <div class="images">
+          <div class="carName">
+            <span>Audi RS3 Sedan</span>
+            <button type="button" class="view-btn" aria-label="View Audi RS3 Sedan">View Car</button>
+          </div>
+          <img class="w-100 h-100" src="../images/car22.jpg" alt="Audi RS3 Sedan Image" />
+        </div>
+        <div class="images">
+          <div class="carName">
+            <span>Audi A5 Sportback</span>
+            <button type="button" class="view-btn" aria-label="View Audi A5 Sportback">View Car</button>
+          </div>
+          <img class="w-100 h-100" src="../images/car3.jpg" alt="Audi A5 Sportback Image" />
+        </div>
+        <div class="images">
+          <div class="carName">
+            <span>Audi S8</span>
+            <button type="button" class="view-btn" aria-label="View Audi S8">View Car</button>
+          </div>
+          <img class="w-100 h-100" src="../images/car4.jpg" alt="Audi S8 Image" />
+        </div>
+        <div class="images">
+          <div class="carName">
+            <span>Audi S5</span>
+            <button type="button" class="view-btn" aria-label="View Audi S5">View Car</button>
+          </div>
+          <img class="w-100 h-100" src="../images/car5.jpg" alt="Audi S5 Image" />
+        </div>
+        <div class="images">
+          <div class="carName">
+            <span>Audi RS5 Sportback</span>
+            <button type="button" class="view-btn" aria-label="View Audi RS5 Sportback">View Car</button>
+          </div>
+          <img class="w-100 h-100" src="../images/car6.jpg" alt="Audi RS5 Sportback Image" />
+        </div>
+      </div>
+    </div>
+
+    <hr class="featurette-divider" />
+
+    <div class="row featurette" aria-label="Audi R8-S description">
+        <div class="col-md-7">
+          <h2 class="featurette-heading fw-normal lh-1">
+            The newly built Audi R8-S
+            <br><span class="text-body-secondary">"Born on the track. Built for the road."</span>
+          </h2>
+          <p class="lead">
+            The Audi R8 is a high-performance sports car known for its sleek design, powerful V10 engine, and advanced
+            Quattro all-wheel-drive system. Launched in 2006, it combines race-inspired technology with luxurious comfort,
+            offering exceptional handling and speed that appeals to both track enthusiasts and everyday drivers. The R8
+            stands out for its aluminum space frame, aerodynamic design, and precise engineering, reflecting Audi's
+            dedication to innovation and performance.
+          </p>
+        </div>
+        <div class="col-md-5">
+          <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500"
+            height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Audi R8-S promotional video"
+            preserveAspectRatio="xMidYMid slice" focusable="false">
+            <foreignObject width="100%" height="100%">
+              <video width="100%" height="100%" autoplay loop muted aria-label="Audi R8-S promotional video playing">
+                <source src="../images/video1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </foreignObject>
+          </svg>
+        </div>
+      </div>
+      
+      <hr class="featurette-divider" aria-hidden="true" />
+      
+      <div class="row featurette" aria-label="Audi R8 championship highlights">
+        <div class="col-md-7 order-md-2">
+          <h2 class="featurette-heading fw-normal lh-1">
+            YET ANOTHER CHAMPIONSHIP!!
+            <span class="text-body-secondary" style="font-size: 0.8em;"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;at Repco
+              Supercars Championship</span>
+          </h2>
+          <p class="lead">
+            Racing teams equipped with the new Audi race car dominated the championship, showcasing Audi's engineering
+            excellence and performance-driven design. The new Audi’s advanced aerodynamics, powerful engine, and precise
+            handling gave racers a clear edge on the track, allowing them to consistently outpace the competition. With
+            each lap, drivers pushed the car to its limits, capitalizing on its stability and speed through challenging
+            turns and straightaways. Audi's relentless pursuit of racing innovation proved decisive, as the team clinched
+            victory, securing a championship win and solidifying Audi’s status in motorsport legends.
+          </p>
+        </div>
+        <div class="col-md-5 order-md-1">
+          <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500"
+            height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Image of champion Audi R8"
+            preserveAspectRatio="xMidYMid slice" focusable="false">
+            <image href="../images/audi_group-featurette.jpg" alt="Group of racers with the Champion Audi R8" width="100%"
+              height="100%" />
+          </svg>
+        </div>
+      </div>
+      
+      <hr class="featurette-divider" aria-hidden="true" />
+      
+      <div class="row featurette" aria-label="Audi R8 V10 engine description">
+        <div class="col-md-7">
+          <h2 class="featurette-heading fw-normal lh-1">
+            Dare to drive it – if you can handle it.
+            <span class="text-body-secondary"></span>
+          </h2>
+          <p class="lead">
+            Powered by a V10 engine, delivering an astounding 562 to 602 horsepower, depending on the model. This beastly
+            engine propels from 0 to 60 mph in as little as 3.1 seconds, with a top speed of up to 205 mph. The R8’s
+            lightning-fast acceleration, coupled with its Quattro all-wheel-drive system, provides unbeatable traction and
+            precision handling, making it a high-performance machine built to thrill at any speed.
+          </p>
+        </div>
+        <div class="col-md-5">
+          <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500"
+            height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Image of a green Audi R8"
+            preserveAspectRatio="xMidYMid slice" focusable="false">
+            <image href="../images/A244334_web_960.jpg" alt="Green Color Audi" width="100%" height="100%" />
+          </svg>
+        </div>
+      </div>
+      
+      <hr class="featurette-divider" aria-hidden="true" />
+      
+      <!-- FOOTER -->
+      <footer class="footer-section" aria-label="Audi website footer">
+        <p>&copy; 2024 Audi AG. All rights reserved. | Experience the Thrill of the Audi R8</p>
+      </footer>
+      
+</body>
+
+
+</html>
