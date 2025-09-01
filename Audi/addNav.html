@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
-    <link rel="icon" type="image/svg" href="./images/titleIcon.png">
+    <link rel="icon" type="image/svg" href="./Images/titleIcon.png">
     <title>Audi | Configurator</title>
     <style>
         body {
@@ -313,7 +313,7 @@
         <!-- Navigation Bar -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
             <div class="nav-container">
-              <img src="./images/titleIcon.png" width="80px" height="50px">
+              <img src="./Images/titleIcon.png" width="80px" height="50px">
               <a class="navbar-brand" href="./index.html">Audi R8</a>
               <!-- Hamburger Menu Button -->
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -438,13 +438,13 @@
                     './Images/MythBlackMetalic/img_6.jpg',
                 ],
                 'Suzuka Gray Metallic': [
-                './images/suzukaGrayMetalic/img_0.jpg',
-                './images/suzukaGrayMetalic/img_1.jpg',
-                './images/suzukaGrayMetalic/img_2.jpg',
-                './images/suzukaGrayMetalic/img_3.jpg',
-                './images/suzukaGrayMetalic/img_4.jpg',
-                './images/suzukaGrayMetalic/img_5.jpg',
-                './images/suzukaGrayMetalic/img_6.jpg'
+                './Images/suzukaGrayMetalic/img_0.jpg',
+                './Images/suzukaGrayMetalic/img_1.jpg',
+                './Images/suzukaGrayMetalic/img_2.jpg',
+                './Images/suzukaGrayMetalic/img_3.jpg',
+                './Images/suzukaGrayMetalic/img_4.jpg',
+                './Images/suzukaGrayMetalic/img_5.jpg',
+                './Images/suzukaGrayMetalic/img_6.jpg'
             ]
             };
 
@@ -469,21 +469,21 @@
                 colorDiv.className = 'color-option';
                 colorDiv.style.backgroundImage = `url(${carImages[color][0]})`;
                 colorDiv.addEventListener('click', () => {
-                    const images = carImages[color];
-                    carImage.src = images[1]; 
+                    const Images = carImages[color];
+                    carImage.src = Images[1]; 
 
                     document.getElementById('selected-color').innerHTML=color;
                     imageOptionsDiv.innerHTML = '';
 
                     
-                    images.forEach((imageSrc, imgIndex) => {
+                    Images.forEach((Imagesrc, imgIndex) => {
                         if (imgIndex === 0) return; 
                         const imgDiv = document.createElement('div');
                         imgDiv.className = 'color-option';
                         imgDiv.classList.add('image-option');
-                        imgDiv.style.backgroundImage = `url(${imageSrc})`;
+                        imgDiv.style.backgroundImage = `url(${Imagesrc})`;
                         imgDiv.addEventListener('click', () => {
-                            carImage.src = imageSrc; 
+                            carImage.src = Imagesrc; 
                         });
                         imageOptionsDiv.appendChild(imgDiv);
                     });
@@ -540,18 +540,18 @@
                 // previewDiv.innerHTML = ''; // Clear preview
 
 
-                const images = carImages['Ascari Blue Metallic'];
-                    carImage.src = images[1]; 
+                const Images = carImages['Ascari Blue Metallic'];
+                    carImage.src = Images[1]; 
                     imageOptionsDiv.innerHTML = '';
 
-                images.forEach((imageSrc, imgIndex) => {
+                Images.forEach((Imagesrc, imgIndex) => {
                         if (imgIndex === 0) return; 
                         const imgDiv = document.createElement('div');
                         imgDiv.className = 'color-option';
                         imgDiv.classList.add('image-option');
-                        imgDiv.style.backgroundImage = `url(${imageSrc})`;
+                        imgDiv.style.backgroundImage = `url(${Imagesrc})`;
                         imgDiv.addEventListener('click', () => {
-                            carImage.src = imageSrc; 
+                            carImage.src = Imagesrc; 
                         });
                         imageOptionsDiv.appendChild(imgDiv);
                     });
