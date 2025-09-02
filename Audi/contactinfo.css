@@ -24,7 +24,7 @@ body, html {
     aspect-ratio: 1;
     max-height: 100vh;
     position: relative;
-    background: url(./images/audir8top.jpg) no-repeat center center / cover;
+    background: url("./Images/audir8top.jpg") no-repeat center center / cover;
 }
 
 .header-overlay {
@@ -96,7 +96,7 @@ body, html {
 .audi-r8-image {
     width: 50%;
     /* object-fit: cover; */
-    background-image: url("./images/audi_r8_top.jpg");
+    background-image: url("./Images/audi_r8_top.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -157,7 +157,7 @@ body, html {
 
 @media (max-width:1200px){
     .audi-r8-image {
-        background-image: url("./images/audi_r7_side.jpg");
+        background-image: url("./Images/audi_r7_side.jpg");
         width: 100%;
         aspect-ratio: 2;
     }
